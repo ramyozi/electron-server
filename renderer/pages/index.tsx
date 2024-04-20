@@ -1,34 +1,15 @@
-import { useEffect } from 'react'
-import Link from 'next/link'
-import Layout from '../components/Layout'
+// pages/index.tsx
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 const IndexPage = () => {
+  const router = useRouter();
+
   useEffect(() => {
-    // add a listener to 'message' channel
-    if (global && global.ipcRenderer) {
-      global.ipcRenderer.addListener('message', (_event, args) => {
-        alert(args)
-      })
-    }
-  }, [])
+    router.push('/signin');
+  }, [router]);
 
-  const onSayHiClick = () => {
-    if (global && global.ipcRenderer) {
-      global.ipcRenderer.send('message', 'hi from next')
-    }
-  }
+  return null;
+};
 
-  return (
-    <Layout title="Home | Next.js + TypeScript + Electron Example">
-      <h1>Hello Next.js 👋</h1>
-      <button onClick={onSayHiClick}>Say hi to electron</button>
-      <p>
-        <Link href="/about">
-          <a>About</a>
-        </Link>
-      </p>
-    </Layout>
-  )
-}
-
-export default IndexPage
+export default IndexPage;

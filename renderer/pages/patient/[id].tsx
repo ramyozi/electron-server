@@ -1,17 +1,18 @@
 // import { NextPageContext } from 'next'
 import Layout from '../../components/Layout'
-import {Analysis, Patient} from '../../interfaces'
+import {Analysis, Patient, User} from '../../interfaces'
 import { findAll, findData } from '../../utils/sample-api-patients'
 import ListDetail from '../../components/Patient/ListDetail'
 import {GetStaticPaths, GetStaticProps, NextPage} from 'next'
 
 type Props = {
     patient: Patient;
+    user: User;
 };
 
-const PatientDetailPage: NextPage<Props> = ({ patient }) => {
+const PatientDetailPage: NextPage<Props> = ({ patient , user}) => {
     return (
-        <Layout title={`${patient.firstName} ${patient.lastName}`}>
+        <Layout title={`${patient.firstName} ${patient.lastName}`} user={user}>
             <ListDetail patient={patient} />
         </Layout>
     );

@@ -8,7 +8,7 @@ const AboutPage = ({ data }) => (
     <a href="https://jsonplaceholder.typicode.com/todos/1">Server-side request:</a>
     <pre>{JSON.stringify(data)}</pre>
     <p>
-      <Link href="/">
+      <Link href="/dashboard">
         <a>Go home</a>
       </Link>
     </p>

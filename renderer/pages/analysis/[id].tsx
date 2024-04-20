@@ -1,21 +1,22 @@
 import { GetServerSideProps, NextPage } from 'next';
 import Layout from '../../components/Layout';
 import { useRouter } from 'next/router';
-import {Analysis} from "../../interfaces";
+import {Analysis, User} from "../../interfaces";
 import {findAnalysis} from "../../utils/sample-api-analysis";
 
 type Props = {
     analysis: Analysis;
+    user: User;
 };
 
-const AnalysisDetailPage: NextPage<Props> = ({ analysis }) => {
+const AnalysisDetailPage: NextPage<Props> = ({ analysis , user}) => {
     const router = useRouter();
     if (router.isFallback) {
         return <div>Loading...</div>;
     }
 
     return (
-        <Layout title={`Analysis Detail`}>
+        <Layout title={`Analysis Detail`} user={user}>
             <h1>Analysis Detail</h1>
             <p>Type: {analysis.analysisType}</p>
             <p>Date: {analysis.createdAt.toDateString()}</p>
