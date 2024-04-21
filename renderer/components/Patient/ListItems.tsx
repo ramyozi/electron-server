@@ -19,8 +19,8 @@ const PatientListItem = ({ patient }: Props) => (
         <td>{patient.email}</td>
         <td>{patient.socialSecurityNumber}</td>
         <td>
-            <Link href={`/patient/${patient.idPatient}`}>
-                <a>View Details</a>
+            <Link key={patient.idPatient} href={`patient/${patient.idPatient}`}>
+                <a>Acceder au dossier</a>
             </Link>
         </td>
     </tr>

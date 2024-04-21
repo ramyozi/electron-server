@@ -27,8 +27,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
     try {
         const patient = await findData(params.id as string);
-        //const analyses = await getAllAnalyses();
-        //return { props: { patient, analyses } };
         return { props: { patient } };
     } catch (error) {
         return { props: { errors: error.message } };

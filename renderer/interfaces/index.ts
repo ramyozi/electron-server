@@ -32,6 +32,7 @@ export type Patient = {
   lastName: string;
   firstName: string;
   dateOfBirth: string;
+  placeOfBirth: string;
   postalAddress: string;
   sex: string;
   phoneNumber: string;

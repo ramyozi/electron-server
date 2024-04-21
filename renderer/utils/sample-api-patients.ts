@@ -7,6 +7,7 @@ export const dataArray: Patient[] = [
     lastName: 'Alice',
     firstName: 'Smith',
     dateOfBirth: '2021-09-01',
+    placeOfBirth: 'Anytown, USA',
     postalAddress: '1234 Main St Anytown, USA',
     email: 'alicesmith@gmail.com',
     sex : 'F',
@@ -18,6 +19,7 @@ export const dataArray: Patient[] = [
     lastName: 'Bouzid',
     firstName: 'Fatima',
     dateOfBirth: '1995-03-12',
+    placeOfBirth: 'Alger',
     postalAddress: '18 Rue des Oliviers, Alger',
     email: 'fatimabouzid@example.dz',
     sex : 'F',
@@ -29,6 +31,7 @@ export const dataArray: Patient[] = [
     lastName: 'Abdelkader',
     firstName: 'Ahmed',
     dateOfBirth: '1980-07-25',
+    placeOfBirth: 'Oran',
     postalAddress: '32 Avenue Pasteur, Oran',
     email: 'ahmedabdelkader@example.dz',
     sex : 'M',
@@ -40,6 +43,7 @@ export const dataArray: Patient[] = [
     lastName: 'Djelloul',
     firstName: 'Nadia',
     dateOfBirth: '1990-11-03',
+    placeOfBirth: 'Tizi Ouzou',
     postalAddress: '5 Rue des Roses, Tizi Ouzou',
     email: 'nadiadjelloul@example.dz',
     sex : 'F',
@@ -51,6 +55,7 @@ export const dataArray: Patient[] = [
     lastName: 'Belkacem',
     firstName: 'Youssef',
     dateOfBirth: '1978-05-20',
+    placeOfBirth: 'Oum El Bouaghi',
     postalAddress: '10 Boulevard Amirouche, Constantine',
     email: 'youssef.belkacem@example.dz',
     sex : 'M',
@@ -62,6 +67,7 @@ export const dataArray: Patient[] = [
     lastName: 'Khelifa',
     firstName: 'Amina',
     dateOfBirth: '2000-12-08',
+    placeOfBirth: 'Bejaia',
     postalAddress: '22 Rue Ibn Khaldoun, Bejaia',
     email: 'amina.khelifa@example.dz',
     sex : 'F',
@@ -90,3 +96,10 @@ export async function findData(id: string): Promise<Patient> {
 export async function findAll(): Promise<Patient[]> {
   return dataArray;
 }
+
+export const calculateAge = (dateOfBirth) => {
+  const birthday = new Date(dateOfBirth);
+  const ageDifMs = Date.now() - birthday.getTime();
+  const ageDate = new Date(ageDifMs);
+  return Math.abs(ageDate.getUTCFullYear() - 1970);
+};

@@ -1,8 +1,11 @@
+import Link from "next/link";
+import React from "react";
+
 const DoctorDashboard = () => (
     <div>
         <h2>Doctor Dashboard</h2>
-        <button>Scan Patient QR Code</button>
-        <button>Search for Patient Dossier</button>
+        <Link href="/scan-qr"><button>Scanner le code QR du patient</button></Link>
+        <Link href="/patients"><button>Voir la liste des patients</button></Link>
     </div>
 );
 

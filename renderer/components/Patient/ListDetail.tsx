@@ -19,8 +19,8 @@ const PatientListItem = ({ patient }: Props) => (
             <p>{patient.postalAddress}</p>
         </div>
         <div className="patient-list-item__footer">
-            <Link href={`/patient/${patient.idPatient}`}>
-                <a>View Details</a>
+            <Link href={`/pages/update-patient/${patient.idPatient}`}>
+                <a>Ajouter de nouvelles informations</a>
             </Link>
         </div>
     </section>
