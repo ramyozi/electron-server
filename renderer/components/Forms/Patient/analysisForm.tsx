@@ -1,61 +1,96 @@
 import {useState} from "react";
+import {Analysis} from "../../../interfaces";
+import {FaPlus, FaTrash} from "react-icons/fa";
+import Select from "react-select";
+import topAnalyses from "../../../public/data/analysesTop100.json";
+
 
 
 type AnalysisFormProps = {
-    onSubmit: (analysis: string[], files: File[]) => void;
-    initialData: string[];
+    onSubmit: (analysis: Analysis[]) => void;
+    initialData: Analysis[];
 };
 
 const AnalysisForm: React.FC<AnalysisFormProps> = ({ onSubmit, initialData }) => {
-    const [analysis, setAnalysis] = useState<string[]>(initialData);
-    const [files, setFiles] = useState<File[]>([]);
-    const [inputValue, setInputValue] = useState("");
+    const [analysis, setAnalysis] = useState<Analysis[]>(initialData);
+    const [selectedAnalysis, setSelectedAnalysis] = useState<{ label: string, value: string } | null>(null);
+    const [customAnalysis, setCustomAnalysis] = useState("");
 
-    const handleAdd = () => {
-        if (inputValue.trim() !== "") {
-            setAnalysis(prev => [...prev, inputValue.trim()]);
-            setInputValue("");
+
+    const handleSelectChange = (selectedOption) => {
+        if (selectedOption.value !== "Autre") {
+            const newAnalysis = {
+                idAnalysis: Math.random(),
+                analysisType: selectedOption.label,
+                files: [],
+                createdAt: new Date()
+            };
+            setAnalysis(prev => [...prev, newAnalysis]);
+            setSelectedAnalysis(null);
+        } else {
+            setSelectedAnalysis(selectedOption);
+        }
+    }
+
+    const handleAddAnalysis = () => {
+        if (selectedAnalysis) {
+            const analysisName = selectedAnalysis.value === "Autre" && customAnalysis.trim() !== "" ? customAnalysis : selectedAnalysis.label;
+            const newAnalysis = {
+                idAnalysis: Math.random(),
+                analysisType: analysisName,
+                files: [],
+                createdAt: new Date()
+            };
+            setAnalysis(prev => [...prev, newAnalysis]);
+            setSelectedAnalysis(null);
+            setCustomAnalysis("");
         }
     };
 
-    const handleDelete = (index: number) => {
-        setAnalysis(analysis => analysis.filter((_, i) => i !== index));
+    const handleDeleteAnalysis = (idAnalysis: number) => {
+        setAnalysis(analysis => analysis.filter(a => a.idAnalysis !== idAnalysis));
     };
 
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const fileList = e.target.files;
-        if (fileList) {
-            setFiles(Array.from(fileList));
-        }
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        onSubmit(analysis, files);
+    const handleFileChange = (files: FileList, an: Analysis) => {
+        an.files.push(...Array.from(files));
+        setAnalysis([...analysis]);
     };
 
     return (
-        <div className="list-form-container" style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <div className="list-container" style={{ flexBasis: '50%' }}>
-                <h2>Liste des Analyses</h2>
-                <ul>
-                    {analysis.map((analysis, index) => (
-                        <li key={index}>
-                            {analysis}
-                            <button onClick={() => handleDelete(index)}>Supprimer</button>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-            <div className="form-container" style={{ flexBasis: '50%' }}>
-                <h2>Ajouter une Analyse</h2>
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="fileInput">Upload File:</label>
-                    <input id="fileInput" type="file" onChange={handleFileChange} accept=".png,.pdf" multiple/>
-                    <button type="submit" style={{marginLeft: '10px'}}>Enregistrer Les Analyses</button>
-                </form>
-
-            </div>
+        <div className="analysis-form-container">
+            <label style={{ display: 'block', marginBottom: '10px' }}>Type d'analyse: </label>
+            <Select
+                options={topAnalyses}
+                value={selectedAnalysis}
+                onChange={handleSelectChange}
+                placeholder="Sélectionner une analyse"
+            />
+            {selectedAnalysis && selectedAnalysis.value === "Autre" && (
+                <div>
+                    <input
+                        type="text"
+                        value={customAnalysis}
+                        onChange={(e) => setCustomAnalysis(e.target.value)}
+                        placeholder="Précisez le type d'analyse"
+                    />
+                    <FaPlus onClick={handleAddAnalysis} style={{ cursor: 'pointer' }} />
+                </div>
+            )}
+            {analysis.map((an, index) => (
+                <div key={index} style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px' }}>
+                    <span>
+                        {an.analysisType} - {an.createdAt.toLocaleDateString()}
+                    </span>
+                    <div>
+                        <input
+                            type="file"
+                            multiple
+                            onChange={(e) => e.target.files && handleFileChange(e.target.files, an)}
+                        />
+                        <FaTrash onClick={() => handleDeleteAnalysis(an.idAnalysis)} style={{ cursor: 'pointer', marginLeft: '10px' }} />
+                    </div>
+                </div>
+            ))}
         </div>
     );
 };

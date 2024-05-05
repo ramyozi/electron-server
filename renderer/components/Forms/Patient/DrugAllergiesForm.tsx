@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FaPlus, FaTrash, FaSave } from 'react-icons/fa';
 
 export type DrugAllergyFormData = string[];
 
@@ -22,25 +23,26 @@ const DrugAllergiesForm: React.FC<DrugAllergiesFormProps> = ({ onSubmit, initial
         setAllergies(allergies => allergies.filter((_, i) => i !== index));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
+    const handleSubmit = () => {
         onSubmit(allergies);
     };
 
     return (
-        <div className="list-form-container" style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <div className="list-container" style={{ flexBasis: '50%' }}>
+        <div className="list-form-container" style={{ display: 'flex', justifyContent: 'space-between', padding: '20px',  gap: '20px' }}>
+            <div className="list-container" style={{ flex: 1, backgroundColor: '#fff', borderRadius: '8px', padding: '20px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)' }}>
                 <h2>Liste des Allergies Médicamenteuses</h2>
                 <ul>
                     {allergies.map((allergy, index) => (
-                        <li key={index}>
+                        <li key={index} style={{ margin: '10px 0' }}>
                             {allergy}
-                            <button onClick={() => handleDelete(index)}>Supprimer</button>
+                            <a onClick={() => handleDelete(index)} style={{ color: 'red', cursor: 'pointer', marginLeft: '10px' }}>
+                                <FaTrash />
+                            </a>
                         </li>
                     ))}
                 </ul>
             </div>
-            <div className="form-container" style={{ flexBasis: '50%' }}>
+            <div className="form-container" style={{ flex: 1, backgroundColor: '#fff', borderRadius: '8px', padding: '20px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)' }}>
                 <h2>Ajouter une Allergie</h2>
                 <form onSubmit={handleSubmit}>
                     <input
@@ -48,9 +50,14 @@ const DrugAllergiesForm: React.FC<DrugAllergiesFormProps> = ({ onSubmit, initial
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}
                         placeholder="Ajouter une allergie médicamenteuse"
+                        style={{ padding: '8px', margin: '10px 0', width: '100%' }}
                     />
-                    <button type="button" onClick={handleAdd}>Ajouter</button>
-                    <button type="submit" style={{ marginLeft: '10px' }}>Enregistrer Les Allergies</button>
+                    <a onClick={handleAdd} style={{ cursor: 'pointer', color: 'green', marginRight: '10px' }}>
+                        <FaPlus /> Ajouter
+                    </a>
+                    <a onClick={() => handleSubmit()} style={{ cursor: 'pointer', color: 'blue' }}>
+                        <FaSave /> Enregistrer Les Allergies
+                    </a>
                 </form>
             </div>
         </div>

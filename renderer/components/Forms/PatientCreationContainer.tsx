@@ -6,6 +6,7 @@ import ExamForm from "./Patient/ExamForm";
 import {useRouter} from "next/router";
 import {useState} from "react";
 import AnalysisForm from "./Patient/analysisForm";
+import {FaCheck, FaChevronLeft, FaChevronRight} from "react-icons/fa";
 
 
 const stepComponents = [
@@ -96,28 +97,49 @@ const PatientCreationContainer = () => {
         }
     };
 
+    const handleFinalSubmit = () => {
+        console.log('Submitting data', {
+            personalInfo,
+            drugAllergies,
+            chronicDiseases,
+            exams,
+            analysis,
+        });
+        router.push('/patients');
+    };
+
     return (
-        <div className="patient-creation-container">
-            <div className="menu">
+        <div style={{ display: 'flex', height: '100vh' }}>
+            <div className="menu" style={{ width: '200px', borderRight: '1px solid #ccc', padding: '10px', height: '100%' }}>
                 {stepComponents.map((item, index) => (
                     <div
                         key={index}
                         className={`menu-item ${index === currentStep ? 'active' : ''}`}
                         onClick={() => setCurrentStep(index)}
+                        style={{ padding: '10px', cursor: 'pointer', color: index === currentStep ? 'blue' : 'black' }}
                     >
                         {item.name}
                     </div>
                 ))}
             </div>
-            <div className="form-container">
+            <div className="form-container" style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '20px' }}>
                 {renderCurrentForm()}
-                <div className="navigation-buttons">
-                    {currentStep > 0 && <button onClick={goPrevious}>← Précédent</button>}
-                    {currentStep < stepComponents.length - 1 && <button onClick={goNext}>Suivant →</button>}
+                <div className="navigation-buttons" style={{ marginTop: 'auto', display: 'flex', justifyContent: 'space-around', padding: '20px 0' }}>
+                    {currentStep > 0 && (
+                        <button onClick={() => setCurrentStep(currentStep - 1)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: "black"  }}>
+                            <FaChevronLeft /> Avant
+                        </button>
+                    )}
+                    {currentStep < stepComponents.length - 1 && (
+                        <button onClick={() => setCurrentStep(currentStep + 1)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: "black" }}>
+                            Après <FaChevronRight />
+                        </button>
+                    )}
                 </div>
             </div>
         </div>
     );
+
 };
 
 export default PatientCreationContainer;

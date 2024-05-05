@@ -1,56 +1,95 @@
 import {useState} from "react";
+import Select from "react-select";
+import topExams from "../../../public/data/examsTop100.json";
+import {FaPlus, FaTrash, FaUpload} from "react-icons/fa";
+import {Exam} from "../../../interfaces";
 
-type ExamFormProps = {
-    onSubmit: (exams: string[]) => void;
-    initialData: string[];
-};
 
-const ExamForm: React.FC<ExamFormProps> = ({ onSubmit, initialData }) => {
-    const [exams, setExams] = useState<string[]>(initialData);
-    const [inputValue, setInputValue] = useState("");
+const ExamForm = ({ onSubmit, initialData }) => {
+    const [exams, setExams] = useState<Exam[]>(initialData);
+    const [selectedExam, setSelectedExam] = useState(null);
+    const [customExam, setCustomExam] = useState("");
 
-    const handleAdd = () => {
-        if (inputValue.trim() !== "") {
-            setExams(prev => [...prev, inputValue.trim()]);
-            setInputValue("");
+    const handleSelectChange = (selectedOption) => {
+        if (selectedOption.value !== "Autre") {
+            const newExam = {
+                idExam: Math.random(),
+                type: selectedOption.label,
+                files: [],
+                createdAt: new Date()
+            };
+            setExams(prev => [...prev, newExam]);
+            setSelectedExam(null);
+        } else {
+            setSelectedExam(selectedOption);
         }
     };
 
-    const handleDelete = (index: number) => {
-        setExams(exams => exams.filter((_, i) => i !== index));
+    const handleAddCustomExam = () => {
+        if (customExam.trim() !== "") {
+            const newExam = {
+                idExam: Math.random(),
+                type: customExam,
+                files: [],
+                createdAt: new Date()
+            };
+            setExams(prev => [...prev, newExam]);
+            setCustomExam("");
+            setSelectedExam(null);
+        }
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        onSubmit(exams);
+    const handleDeleteExam = (idExam) => {
+        setExams(exams => exams.filter(exam => exam.idExam !== idExam));
+    };
+
+    const handleFileChange = (files, exam) => {
+        exam.files.push(...files);
+        setExams([...exams]); // Update to trigger re-render
     };
 
     return (
-        <div className="list-form-container" style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <div className="list-container" style={{ flexBasis: '50%' }}>
-                <h2>Liste des Examens</h2>
-                <ul>
-                    {exams.map((exam, index) => (
-                        <li key={index}>
-                            {exam}
-                            <button onClick={() => handleDelete(index)}>Supprimer</button>
-                        </li>
+        <div className="exam-form-container">
+            <div style={{ marginBottom: '20px' }}>
+                <label style={{ display: 'block', marginBottom: '10px' }}>Le type d'examen: </label>
+                <Select
+                    options={topExams}
+                    value={selectedExam}
+                    onChange={handleSelectChange}
+                    placeholder="Selectionner un examen"
+                />
+                {selectedExam && selectedExam.value === "Autre" && (
+                    <div>
+                        <input
+                            type="text"
+                            value={customExam}
+                            onChange={(e) => setCustomExam(e.target.value)}
+                            placeholder="Specifiez le nom de l'examen"
+                        />
+                        <FaPlus onClick={handleAddCustomExam} style={{ cursor: 'pointer' }} />
+                    </div>
+                )}
+            </div>
+            {exams.map((exam, index) => (
+                <div key={index} style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px' }}>
+                    <div style={{ fontWeight: 'bold', marginBottom: '5px' }}>
+                        {exam.type} - {exam.createdAt.toLocaleDateString()}
+                        <FaTrash onClick={() => handleDeleteExam(exam.idExam)} style={{ cursor: 'pointer', marginLeft: '10px' }} />
+                    </div>
+
+                    {exam.files.map((file, fileIndex) => (
+                        <span key={fileIndex} style={{ marginRight: '10px' }}>{file.name}</span>
                     ))}
-                </ul>
-            </div>
-            <div className="form-container" style={{ flexBasis: '50%' }}>
-                <h2>Ajouter un Examen</h2>
-                <form onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        value={inputValue}
-                        onChange={(e) => setInputValue(e.target.value)}
-                        placeholder="Ajouter un examen"
-                    />
-                    <button type="button" onClick={handleAdd}>Ajouter</button>
-                    <button type="submit" style={{ marginLeft: '10px' }}>Enregistrer Les Examens</button>
-                </form>
-            </div>
+                    <div>
+                        <input
+                            type="file"
+                            multiple
+                            onChange={(e) => e.target.files && handleFileChange(Array.from(e.target.files), exam)}
+                            style={{ display: 'block', marginBottom: '5px' }}
+                        />
+                    </div>
+                </div>
+            ))}
         </div>
     );
 };

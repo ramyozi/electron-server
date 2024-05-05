@@ -60,7 +60,7 @@ export type RadiologicalExam = {
 export type Exam = {
   idExam: number;
   type: string;
-  file: string;
+  files: File[];
   createdAt: Date;
 };
 
@@ -72,7 +72,7 @@ export type MedicalAnalysis = {
 export type Analysis = {
   idAnalysis: number;
   analysisType: string;
-  file: string;
+  files: File[];
   createdAt: Date;
 };
 

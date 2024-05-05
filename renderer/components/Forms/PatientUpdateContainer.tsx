@@ -7,12 +7,14 @@ import ChronicDiseasesForm from "./Patient/ChronicDiseasesForm";
 import PatientSummary from "./Patient/PatientSummary";
 import ExamForm from "./Patient/ExamForm";
 import AnalysisForm from "./Patient/analysisForm";
-import {FaChevronLeft, FaChevronRight} from "react-icons/fa";
+import {FaCheck, FaChevronLeft, FaChevronRight} from "react-icons/fa";
 
 const stepComponents = [
     { name: "Personal Information", component: PersonalInfoForm },
     { name: "Allergies Médicamenteuses", component: DrugAllergiesForm },
     { name: "Maladies Chroniques", component: ChronicDiseasesForm },
+    { name: "Exams", component: ExamForm },
+    { name: "Analysis", component: AnalysisForm },
     { name: "Récapitulatif", component: PatientSummary }
 ];
 
@@ -105,37 +107,35 @@ const PatientUpdateContainer: React.FC<PatientUpdateContainerProps> = ({ patient
     };
 
     return (
-        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px'}}>
-            {renderForm()}
-
-            <div style={{marginBottom: '20px', display: 'flex'}}>
-                {currentStep > 0 && (
-                    <button onClick={() => setCurrentStep(currentStep - 1)} style={{
-                        marginRight: '10px',
-                        background: 'none',
-                        border: 'none',
-                        cursor: 'pointer',
-                        color: 'royalblue'
-                    }}>
-                        <i className="fas fa-arrow-left"></i> Previous
-                    </button>
-                )}
-                {currentStep < stepComponents.length - 1 && (
-                    <button onClick={() => setCurrentStep(currentStep + 1)}
-                            style={{background: 'none', border: 'none', cursor: 'pointer', color: 'royalblue'}}>
-                        Next <i className="fas fa-arrow-right"></i>
-                    </button>
-                )}
-                {currentStep === stepComponents.length - 1 && (
-                    <button onClick={handleFinalSubmit}
-                            style={{background: 'none', border: 'none', cursor: 'pointer', color: 'green'}}>
-                        Submit <i className="fas fa-check"></i>
-                    </button>
-                )}
+        <div style={{ display: 'flex', height: '100vh' }}>
+            <div className="menu" style={{ width: '200px', borderRight: '1px solid #ccc', padding: '10px', height: '100%' }}>
+                {stepComponents.map((item, index) => (
+                    <div key={index}
+                         className={`menu-item ${index === currentStep ? 'active' : ''}`}
+                         onClick={() => setCurrentStep(index)}
+                         style={{ padding: '10px', cursor: 'pointer', color: index === currentStep ? 'blue' : 'black' }}
+                    >
+                        {item.name}
+                    </div>
+                ))}
+            </div>
+            <div className="form-container" style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '20px' }}>
+                {renderForm()}
+                <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'space-around', padding: '20px 0' }}>
+                    {currentStep > 0 && (
+                        <button onClick={() => setCurrentStep(currentStep - 1)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: "black"  }}>
+                            <FaChevronLeft /> Avant
+                        </button>
+                    )}
+                    {currentStep < stepComponents.length - 1 && (
+                        <button onClick={() => setCurrentStep(currentStep + 1)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: "black"  }}>
+                            Après <FaChevronRight />
+                        </button>
+                    )}
+                </div>
             </div>
         </div>
-
     );
-};
+}
 
 export default PatientUpdateContainer;

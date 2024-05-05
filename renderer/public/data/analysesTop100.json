@@ -1,0 +1,15 @@
+[
+  { "label": "Numération formule sanguine (NFS)", "value": "Numération formule sanguine (NFS)" },
+  { "label": "Ionogramme sanguin", "value": "Ionogramme sanguin" },
+  { "label": "Analyse d'urine", "value": "Analyse d'urine" },
+  { "label": "Test de glycémie", "value": "Test de glycémie" },
+  { "label": "Test de la fonction rénale", "value": "Test de la fonction rénale" },
+  { "label": "Test de la fonction hépatique", "value": "Test de la fonction hépatique" },
+  { "label": "Test de la thyroïde", "value": "Test de la thyroïde" },
+  { "label": "Bilirubine", "value": "Bilirubine" },
+  { "label": "Gaz du sang", "value": "Gaz du sang" },
+  { "label": "Culture bactérienne", "value": "Culture bactérienne" },
+  { "label": "Recherche de parasites", "value": "Recherche de parasites" },
+  { "label": "Biopsie", "value": "Biopsie" },
+  { "label": "Autre", "value": "Autre" }
+]
