@@ -22,6 +22,7 @@ export type User = {
   email: string
   password: string
   role: string
+  sex: string
   status: string
   created_at: string
   updated_at: string

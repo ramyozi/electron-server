@@ -4,13 +4,15 @@ import {Analysis, Patient, User} from '../../interfaces'
 import { findAll, findData } from '../../utils/sample-api-patients'
 import ListDetail from '../../components/Patient/ListDetail'
 import {GetStaticPaths, GetStaticProps, NextPage} from 'next'
+import Link from "next/link";
+import {useUser} from "../../context/UserContext";
 
 type Props = {
     patient: Patient;
-    user: User;
 };
 
-const PatientDetailPage: NextPage<Props> = ({ patient , user}) => {
+const PatientDetailPage: NextPage<Props> = ({ patient }) => {
+    const {user} = useUser();
     return (
         <Layout title={`${patient.firstName} ${patient.lastName}`} user={user}>
             <ListDetail patient={patient} />

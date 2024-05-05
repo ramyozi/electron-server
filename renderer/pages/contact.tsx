@@ -1,30 +1,75 @@
-import Link from 'next/link'
-import Layout from '../components/Layout'
+import React, { useState } from 'react';
+import Layout from '../components/Layout';
 
-const ContactPage = ({ data }) => (
-    <Layout title="Contact | Next.js + TypeScript + Electron Example">
-        <h1>Contact</h1>
-        <p>This is the about page</p>
-        <a href="https://jsonplaceholder.typicode.com/todos/1">Server-side request:</a>
-        <pre>{JSON.stringify(data)}</pre>
-        <p>
-            <Link href="/dashboard">
-                <a>Go home</a>
-            </Link>
-        </p>
-    </Layout>
-)
+const PageContact = () => {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        message: ''
+    });
 
-// This gets called on every request
-export async function getServerSideProps() {
-    // Fetch data from external API
-    const res = await fetch(`https://jsonplaceholder.typicode.com/todos/1`)
-    const data = await res.json()
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
 
-    console.log(data);
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const response = await fetch('/api/sendMail', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        });
 
-    // Pass data to the page via props
-    return { props: { data } }
-}
+        if (response.ok) {
+            alert('Email envoyé avec succès !');
+            setFormData({ name: '', email: '', message: '' });
+        } else {
+            alert('Échec de l\'envoi de l\'email.');
+        }
+    };
 
-export default ContactPage
+    return (
+        <Layout title="Contactez-nous | Patientcare">
+            <div style={{ maxWidth: '500px', margin: '0 auto', padding: '20px' }}>
+                <h1>Nous Contacter</h1>
+                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
+                    <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="Votre Nom"
+                        required
+                        style={{ margin: '10px 0', padding: '10px' }}
+                    />
+                    <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="Votre Adresse Email"
+                        required
+                        style={{ margin: '10px 0', padding: '10px' }}
+                    />
+                    <textarea
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        placeholder="Votre Message"
+                        required
+                        style={{ height: '100px', margin: '10px 0', padding: '10px' }}
+                    />
+                    <button type="submit" style={{ padding: '10px', backgroundColor: '#007bff', color: 'white', cursor: 'pointer' }}>Envoyer le Message</button>
+                </form>
+            </div>
+        </Layout>
+    );
+};
+
+export default PageContact;

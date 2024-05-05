@@ -23,6 +23,7 @@ export const dataArray: User[] = [
         email: 'samitouati@example.dz',
         password: 'password',
         role: 'doctor',
+        sex: 'M',
         status: 'active',
         created_at: '2021-09-01',
         updated_at: '2021-09-01'
@@ -34,6 +35,7 @@ export const dataArray: User[] = [
         email: 'lilabenmoussa@example.dz',
         password: 'password',
         role: 'nurse',
+        sex: 'F',
         status: 'active',
         created_at: '2021-09-01',
         updated_at: '2021-09-01'
@@ -45,6 +47,7 @@ export const dataArray: User[] = [
         email: 'omarkhaled@example.dz',
         password: 'password',
         role: 'admin',
+        sex: 'M',
         status: 'active',
         created_at: '2021-09-01',
         updated_at: '2021-09-01'
@@ -56,6 +59,7 @@ export const dataArray: User[] = [
         email: 'yasminebensaid@example.dz',
         password: 'password',
         role: 'doctor',
+        sex: 'F',
         status: 'active',
         created_at: '2021-09-01',
         updated_at: '2021-09-01'
@@ -67,6 +71,7 @@ export const dataArray: User[] = [
         email: 'aminelarbi@example.dz',
         password: 'password',
         role: 'nurse',
+        sex: 'M',
         status: 'active',
         created_at: '2021-09-01',
         updated_at: '2021-09-01'
@@ -78,6 +83,7 @@ export const dataArray: User[] = [
         email: 'sarabouzidi@example.dz',
         password: 'password',
         role: 'admin',
+        sex: 'F',
         status: 'active',
         created_at: '2021-09-01',
         updated_at: '2021-09-01'

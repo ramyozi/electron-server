@@ -64,7 +64,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ onSubmit, initialDa
             <label>Numéro de sécurité sociale:</label>
             <input type="text" name="socialSecurityNumber" value={personalInfo.socialSecurityNumber} onChange={handleChange} required />
 
-            <button type="submit">Soumettre</button>
+            <button type="submit">Ajouter le patient</button>
         </form>
     );
 };

@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 
 import { User } from '../../interfaces'
+import {FaEye} from "react-icons/fa";
 
 type Props = {
   data: User
@@ -18,7 +19,7 @@ const ListItems = ({ data }: Props) => (
         <td>{data.updated_at}</td>
         <td>
             <Link href={`/user/${data.id}`}>
-                <a>View</a>
+                <FaEye />
             </Link>
         </td>
     </tr>

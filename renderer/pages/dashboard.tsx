@@ -6,24 +6,23 @@ import AdminDashboard from '../components/RoleDashboards/AdminDashboard';
 import NurseDashboard from '../components/RoleDashboards/NurseDashboard';
 import DoctorDashboard from '../components/RoleDashboards/DoctorDashboard';
 import { User } from '../interfaces';
+import {useUser} from "../context/UserContext";
 
 const DashboardPage = () => {
-    const [user, setUser] = useState<User | null>(null);
+    const { user } = useUser();
     const router = useRouter();
+    console.error('user', user);
 
     useEffect(() => {
-        // Get the stored user data from sessionStorage
-        const storedUser = sessionStorage.getItem('user');
-        if (!storedUser) {
-            router.push('/signin'); // Redirect to sign-in if user data is not found
-        } else {
-            setUser(JSON.parse(storedUser));
+        if (!user) {
+            router.push('/signin');
         }
-    }, [router]);
+    }, [user, router]);
 
     if (!user) {
-        return null; // or a loading spinner
+        return null;
     }
+
 
     const renderDashboard = () => {
         switch (user.role) {
@@ -43,8 +42,12 @@ const DashboardPage = () => {
 
     return (
         <Layout title="Patientcare" user={user}>
-        {renderDashboard()}
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
+                <img src="/images/1.jpg" alt="Dashboard Image" style={{ width: '30%', marginRight: '20px' }} />
+                {renderDashboard()}
+            </div>
         </Layout>
+
     );
 };
 

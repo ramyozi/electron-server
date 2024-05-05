@@ -3,6 +3,7 @@ import {Patient} from "../../interfaces";
 import Layout from "../../components/Layout";
 import {findData} from "../../utils/sample-api-patients";
 import PatientUpdateContainer from "../../components/Forms/PatientUpdateContainer";
+import {useUser} from "../../context/UserContext";
 
 
 interface UpdatePatientPageProps {
@@ -10,8 +11,10 @@ interface UpdatePatientPageProps {
 }
 
 const UpdatePatientPage: NextPage<UpdatePatientPageProps> = ({ patient }) => {
+    const {user} = useUser();
+
     return (
-        <Layout title={`Update ${patient.firstName} ${patient.lastName}`}>
+        <Layout title={`Le dossier de ${patient.firstName} ${patient.lastName}`} user={user}>
             <PatientUpdateContainer patient={patient} />
         </Layout>
     );

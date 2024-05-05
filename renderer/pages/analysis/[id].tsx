@@ -3,13 +3,14 @@ import Layout from '../../components/Layout';
 import { useRouter } from 'next/router';
 import {Analysis, User} from "../../interfaces";
 import {findAnalysis} from "../../utils/sample-api-analysis";
+import {useUser} from "../../context/UserContext";
 
 type Props = {
     analysis: Analysis;
-    user: User;
 };
 
-const AnalysisDetailPage: NextPage<Props> = ({ analysis , user}) => {
+const AnalysisDetailPage: NextPage<Props> = ({ analysis }) => {
+    const user: User = useUser();
     const router = useRouter();
     if (router.isFallback) {
         return <div>Loading...</div>;

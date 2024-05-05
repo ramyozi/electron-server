@@ -4,6 +4,7 @@ import { User } from '../../interfaces'
 import { findAll, findData } from '../../utils/sample-api-users'
 import ListDetail from '../../components/User/ListDetail'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import {useUser} from "../../context/UserContext";
 
 type Params = {
   id?: string
@@ -15,9 +16,10 @@ type Props = {
 }
 
 const InitialPropsDetail = ({ item, errors }: Props) => {
+    const {user} = useUser();
   if (errors) {
     return (
-      <Layout title={`Error | Next.js + TypeScript + Electron Example`} user={item}>
+      <Layout title={`Erreur`} user={user}>
         <p>
           <span style={{ color: 'red' }}>Error:</span> {errors}
         </p>
@@ -27,8 +29,8 @@ const InitialPropsDetail = ({ item, errors }: Props) => {
 
   return (
     <Layout
-      title={`${item ? item.firstname : 'Detail'} | Next.js + TypeScript Example`}
-    >
+      title={`${item ? item.firstname : 'Detail'} `}
+        user={user} >
       {item && <ListDetail item={item} />}
     </Layout>
   )

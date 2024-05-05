@@ -1,49 +1,54 @@
-// pages/signin.tsx
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import { dataArray } from '../utils/sample-api-users';
+import { useUser } from '../context/UserContext';
 import Layout from '../components/Layout';
-import { dataArray } from '../utils/sample-api-users'; // Adjust the path as needed
+import Image from 'next/image';
+import styles from '../public/styles/SignInForm.module.css';
 
 const SignInPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
     const router = useRouter();
+    const { login } = useUser();
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
-        // Find user by email
-        const user = dataArray.find(user => user.email === email);
-        if (user && user.password === password) { // In a real app, you'd hash and check the password
-            // User is found and password matches
-            // Store user details in sessionStorage for this example (not for production use)
-            sessionStorage.setItem('user', JSON.stringify(user));
-            router.push('/dashboard'); // Redirect to the dashboard page
+        const user = dataArray.find(user => user.email === email && user.password === password);
+        if (user) {
+            login(user);
+            router.push('/dashboard');
         } else {
-            alert('Invalid email or password');
+            setError('Adresse e-mail ou mot de passe invalide');
         }
     };
 
     return (
-        <Layout title="Sign In | Next.js + TypeScript + Electron Example">
-            <h1>Sign In</h1>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <button type="submit">Sign In</button>
-            </form>
+        <Layout title="Connexion">
+            <div className={styles.container}>
+                <h1 className={styles.title}>Connexion</h1>
+                <form className={styles.form} onSubmit={handleSubmit}>
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        className={styles.input}
+                    />
+                    <input
+                        type="password"
+                        placeholder="Mot de passe"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        className={styles.input}
+                    />
+                    {error && <p style={{ color: 'red' }}>{error}</p>}
+                    <button type="submit" className={styles.button}>Se connecter</button>
+                </form>
+            </div>
         </Layout>
     );
 };

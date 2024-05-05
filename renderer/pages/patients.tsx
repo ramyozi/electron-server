@@ -2,16 +2,18 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Layout from '../components/Layout'
 import List from '../components/Patient/List'
-import {Patient, User} from '../interfaces'
+import { Patient, User } from '../interfaces'
 import { findAll } from '../utils/sample-api-patients'
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
+import {useUser} from "../context/UserContext";
 
 type Props = {
     items: Patient[]
-    user: User;
 }
 
-const WithInitialProps = ({ items , user}: Props) => {
+const WithInitialProps = ({ items }: Props) => {
+
+    const { user } = useUser();
     const router = useRouter()
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredPatients, setFilteredPatients] = useState<Patient[]>([]);
@@ -32,6 +34,29 @@ const WithInitialProps = ({ items , user}: Props) => {
         setSearchTerm(e.target.value);
     };
 
+    const styles = {
+        searchInput: {
+            width: '40%',
+            padding: '10px',
+            margin: '10px 0',
+            fontSize: '16px',
+            borderRadius: '5px',
+            border: '1px solid #ccc'
+        },
+        dropdownItem: {
+            display: 'block',
+            padding: '10px',
+            textDecoration: 'none',
+            color: 'black',
+            backgroundColor: 'white',
+            borderBottom: '1px solid #eee',
+            transition: 'background-color 0.3s',
+        },
+        dropdownItemHover: {
+            backgroundColor: '#f0f0f0'
+        }
+    };
+
     return (
         <Layout title="Liste des patients" user={user}>
             <h1>Liste des Patients</h1>
@@ -40,23 +65,18 @@ const WithInitialProps = ({ items , user}: Props) => {
                 value={searchTerm}
                 onChange={handleSearch}
                 placeholder="Rechercher par nom ou prénom..."
-                className="search-input"
+                style={styles.searchInput}
             />
             {searchTerm && (
-                <div className="patient-dropdown">
+                <div>
                     {filteredPatients.map(patient => (
                         <Link key={patient.idPatient} href={`/patient/${patient.idPatient}`}>
-                            <a className="dropdown-item">{patient.firstName} {patient.lastName}</a>
+                            <a style={styles.dropdownItem}>{patient.firstName} {patient.lastName}</a>
                         </Link>
                     ))}
                 </div>
             )}
             <List patients={items} />
-            <p>
-                <Link href="/dashboard">
-                    <a>Retour à l'accueil</a>
-                </Link>
-            </p>
         </Layout>
     );
 };

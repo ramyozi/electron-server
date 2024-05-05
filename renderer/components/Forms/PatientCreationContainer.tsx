@@ -2,14 +2,18 @@ import PersonalInfoForm, {PersonalInfoFormData} from "./Patient/PersonalInfoForm
 import DrugAllergiesForm from "./Patient/DrugAllergiesForm";
 import ChronicDiseasesForm from "./Patient/ChronicDiseasesForm";
 import PatientSummary from "./Patient/PatientSummary";
+import ExamForm from "./Patient/ExamForm";
 import {useRouter} from "next/router";
 import {useState} from "react";
+import AnalysisForm from "./Patient/analysisForm";
 
 
 const stepComponents = [
     { name: "Personal Information", component: PersonalInfoForm },
     { name: "Allergies Médicamenteuses", component: DrugAllergiesForm },
     { name: "Maladies Chroniques", component: ChronicDiseasesForm },
+    { name: "Exams", component: ExamForm },
+    { name: "Analysis", component: AnalysisForm },
     { name: "Récapitulatif", component: PatientSummary }
 ];
 
@@ -23,7 +27,7 @@ const PatientCreationContainer = () => {
         dateOfBirth: '',
         placeOfBirth: '',
         address: '',
-        sex: 'M', // Assuming 'M' as default; adjust as necessary
+        sex: 'M',
         phoneNumber: '',
         socialSecurityNumber: '',
     };
@@ -31,11 +35,34 @@ const PatientCreationContainer = () => {
     const [personalInfo, setPersonalInfo] = useState<PersonalInfoFormData>(initialPersonalInfo);
     const [drugAllergies, setDrugAllergies] = useState<string[]>([]);
     const [chronicDiseases, setChronicDiseases] = useState<string[]>([]);
+    const [exams, setExams] = useState<string[]>([]);
+    const [analysis, setAnalysis] = useState<string[]>([]);
 
     const handlePersonalInfoSubmit = (data: PersonalInfoFormData) => {
         setPersonalInfo(data);
-        goNext();
+        // TODO: Save data to backend
+        router.push('/patients');
     };
+
+    const handleDrugAllergiesSubmit = (data: string[]) => {
+        setDrugAllergies(data);
+        goNext();
+    }
+
+     const handleChronicDiseasesSubmit = (data: string[]) => {
+        setChronicDiseases(data);
+        goNext();
+     }
+
+    const handleExamsSubmit = (data: string[]) => {
+        setExams(data);
+        goNext();
+    }
+
+    const handleAnalysisSubmit = (data: string[]) => {
+        setAnalysis(data);
+        goNext();
+    }
 
     const goNext = () => {
         setCurrentStep(prev => (prev < stepComponents.length - 1 ? prev + 1 : prev));
@@ -50,18 +77,22 @@ const PatientCreationContainer = () => {
             case 0:
                 return <PersonalInfoForm initialData={personalInfo} onSubmit={handlePersonalInfoSubmit} />;
             case 1:
-                return <DrugAllergiesForm initialData={drugAllergies} onSubmit={setDrugAllergies} />;
+                return <DrugAllergiesForm initialData={drugAllergies} onSubmit={handleDrugAllergiesSubmit} />;
             case 2:
-                return <ChronicDiseasesForm initialData={chronicDiseases} onSubmit={setChronicDiseases} />;
+                return <ChronicDiseasesForm initialData={chronicDiseases} onSubmit={handleChronicDiseasesSubmit} />;
             case 3:
-                return <PatientSummary
-                    personalInfo={personalInfo}
-                    drugAllergies={drugAllergies}
-                    chronicDiseases={chronicDiseases}
-                    onSubmit={() => router.push('/patients')}
-                />;
+                return <ExamForm initialData={exams} onSubmit={handleExamsSubmit} />;
+            case 4:
+                return <AnalysisForm initialData={analysis} onSubmit={handleAnalysisSubmit} />;
+            case 5:
+                return <PatientSummary personalInfo={personalInfo} drugAllergies={drugAllergies}
+                                       chronicDiseases={chronicDiseases} onSubmit={
+                    () => {
+                        router.push('/');
+                    }
+                } />;
             default:
-                return <div>Step not found</div>;
+                return null;
         }
     };
 

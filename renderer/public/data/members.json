@@ -1,0 +1,31 @@
+[
+  {
+    "id": 1,
+    "firstName": "Jean",
+    "lastName": "Dupont",
+    "role": "Médecin",
+    "university": "Université de Paris",
+    "masters": "Chirurgie",
+    "image": "2.jpg",
+    "socialMedia": {
+      "twitter": "https://twitter.com/jeandupont",
+      "linkedin": "https://www.linkedin.com/in/jeandupont",
+      "facebook": "https://www.facebook.com/jeandupont",
+      "email": "aaaaaaaaaa@toto.fr",
+      "phone": "0606060606"
+    }
+  },
+  {
+    "id": 2,
+    "firstName": "Marie",
+    "lastName": "Martin",
+    "role": "Infirmière",
+    "university": "Université de Lyon",
+    "masters": "Soins Infirmiers",
+    "image": "1.jpg",
+    "socialMedia": {
+      "twitter": "https://twitter.com/mariemartin",
+      "linkedin": "https://www.linkedin.com/in/mariemartin"
+    }
+  }
+]
