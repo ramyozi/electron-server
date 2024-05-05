@@ -11,7 +11,7 @@ const AboutPage = ({ members }) => {
 
 
     return (
-        <Layout title="À Propos | Patientcare">
+        <Layout title="À Propos de nous | Patientcare">
             <div style={{ padding: '20px', textAlign: 'center', width: '70%', justifyContent: 'center', margin: '0 auto', alignItems: 'center' }}>
                 <h1>À propos de Patientcare</h1>
                 <p style={{ fontSize: '18px', margin: '20px 0' }}>
