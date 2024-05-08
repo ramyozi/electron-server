@@ -1,0 +1,129 @@
+{
+  "bodyParts": [
+    {
+      "id": "head",
+      "label": "Head",
+      "diseases": ["Migraine", "Neurological Disorders"]
+    },
+    {
+      "id": "face",
+      "label": "Face",
+      "diseases": ["Facial Palsy", "Acne"]
+    },
+    {
+      "id": "neck",
+      "label": "Neck",
+      "diseases": ["Thyroid Disorders", "Cervical Spondylosis"]
+    },
+    {
+      "id": "shoulder-left",
+      "label": "Left Shoulder",
+      "diseases": ["Shoulder Dislocation", "Frozen Shoulder"]
+    },
+    {
+      "id": "shoulder-right",
+      "label": "Right Shoulder",
+      "diseases": ["Shoulder Dislocation", "Frozen Shoulder"]
+    },
+    {
+      "id": "chest-left",
+      "label": "Left Chest",
+      "diseases": ["Heart Disease", "Breast Cancer"]
+    },
+    {
+      "id": "chest-right",
+      "label": "Right Chest",
+      "diseases": ["Heart Disease", "Breast Cancer"]
+    },
+    {
+      "id": "belly-left",
+      "label": "Left Abdomen",
+      "diseases": ["Gastritis", "Ulcers"]
+    },
+    {
+      "id": "belly-right",
+      "label": "Right Abdomen",
+      "diseases": ["Gastritis", "Ulcers"]
+    },
+    {
+      "id": "arm-left",
+      "label": "Left Arm",
+      "diseases": ["Fractures", "Muscle Strain"]
+    },
+    {
+      "id": "arm-right",
+      "label": "Right Arm",
+      "diseases": ["Fractures", "Muscle Strain"]
+    },
+    {
+      "id": "forearm-left",
+      "label": "Left Forearm",
+      "diseases": ["Fractures", "Tendonitis"]
+    },
+    {
+      "id": "forearm-right",
+      "label": "Right Forearm",
+      "diseases": ["Fractures", "Tendonitis"]
+    },
+    {
+      "id": "thigh-left",
+      "label": "Left Thigh",
+      "diseases": ["Muscle Tears", "Venous Thrombosis"]
+    },
+    {
+      "id": "thigh-right",
+      "label": "Right Thigh",
+      "diseases": ["Muscle Tears", "Venous Thrombosis"]
+    },
+    {
+      "id": "innerthigh-left",
+      "label": "Left Inner Thigh",
+      "diseases": ["Infections", "Rashes"]
+    },
+    {
+      "id": "innerthigh-right",
+      "label": "Right Inner Thigh",
+      "diseases": ["Infections", "Rashes"]
+    },
+    {
+      "id": "genitalia",
+      "label": "Genitalia",
+      "diseases": ["STDs", "Urinary Tract Infections"]
+    },
+    {
+      "id": "buttock",
+      "label": "Buttock",
+      "diseases": ["Sciatica", "Hemorrhoids"]
+    },
+    {
+      "id": "loin",
+      "label": "Loin",
+      "diseases": ["Kidney Stones", "Back Pain"]
+    },
+    {
+      "id": "column",
+      "label": "Spinal Column",
+      "diseases": ["Herniated Disc", "Scoliosis"]
+    },
+    {
+      "id": "back-left",
+      "label": "Left Back",
+      "diseases": ["Back Pain", "Muscle Spasm"]
+    },
+    {
+      "id": "back-right",
+      "label": "Right Back",
+      "diseases": ["Back Pain", "Muscle Spasm"]
+    },
+    {
+      "id": "clavicule-left",
+      "label": "Left Clavicle",
+      "diseases": ["Fracture", "Clavicle Injury"]
+    },
+    {
+      "id": "clavicule-right",
+      "label": "Right Clavicle",
+      "diseases": ["Fracture", "Clavicle Injury"]
+    }
+  ]
+}
