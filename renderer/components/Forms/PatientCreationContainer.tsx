@@ -7,6 +7,7 @@ import {useRouter} from "next/router";
 import {useState} from "react";
 import AnalysisForm from "./Patient/analysisForm";
 import {FaCheck, FaChevronLeft, FaChevronRight} from "react-icons/fa";
+import {Analysis, Exam} from "../../interfaces";
 
 
 const stepComponents = [
@@ -36,8 +37,8 @@ const PatientCreationContainer = () => {
     const [personalInfo, setPersonalInfo] = useState<PersonalInfoFormData>(initialPersonalInfo);
     const [drugAllergies, setDrugAllergies] = useState<string[]>([]);
     const [chronicDiseases, setChronicDiseases] = useState<string[]>([]);
-    const [exams, setExams] = useState<string[]>([]);
-    const [analysis, setAnalysis] = useState<string[]>([]);
+    const [exams, setExams] = useState<Exam[]>([]);
+    const [analysis, setAnalysis] = useState<Analysis[]>([]);
 
     const handlePersonalInfoSubmit = (data: PersonalInfoFormData) => {
         setPersonalInfo(data);
@@ -55,12 +56,12 @@ const PatientCreationContainer = () => {
         goNext();
      }
 
-    const handleExamsSubmit = (data: string[]) => {
+    const handleExamsSubmit = (data: Exam[]) => {
         setExams(data);
         goNext();
     }
 
-    const handleAnalysisSubmit = (data: string[]) => {
+    const handleAnalysisSubmit = (data: Analysis[]) => {
         setAnalysis(data);
         goNext();
     }

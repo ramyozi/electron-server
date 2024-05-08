@@ -9,13 +9,13 @@ const medicalAnalyses: MedicalAnalysis[] = [
             {
                 idAnalysis: 11,
                 analysisType: 'Blood Test',
-                file: 'blood-test-101-a1.pdf',
+                files: [],
                 createdAt: new Date('2022-04-12')
             },
             {
                 idAnalysis: 12,
                 analysisType: 'X-Ray',
-                file: 'xray-101-a2.pdf',
+                files: [],
                 createdAt: new Date('2022-05-15')
             }
         ]
@@ -26,7 +26,7 @@ const medicalAnalyses: MedicalAnalysis[] = [
             {
                 idAnalysis: 1,
                 analysisType: 'MRI',
-                file: 'mri-102-b1.pdf',
+                files: [],
                 createdAt: new Date('2022-06-10')
             }
         ]

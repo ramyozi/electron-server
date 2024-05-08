@@ -21,7 +21,18 @@ const AnalysisDetailPage: NextPage<Props> = ({ analysis }) => {
             <h1>Analysis Detail</h1>
             <p>Type: {analysis.analysisType}</p>
             <p>Date: {analysis.createdAt.toDateString()}</p>
-            <p>File: {analysis.file}</p>
+            {
+                analysis.files.length > 0 && (
+                    <div>
+                        <h3>Files</h3>
+                        <ul>
+                            {analysis.files.map((file, index) => (
+                                <li key={index}>{file.name}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )
+            }
         </Layout>
     );
 };

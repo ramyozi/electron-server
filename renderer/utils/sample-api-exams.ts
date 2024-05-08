@@ -8,13 +8,13 @@ const dataArray: RadiologicalExam[] = [
             {
                 idExam: 11,
                 type: 'X-Ray',
-                file: 'xray-101-a1.pdf',
+                files: [],
                 createdAt: new Date('2022-04-12')
             },
             {
                 idExam: 12,
                 type: 'MRI',
-                file: 'mri-101-a2.pdf',
+                files: [],
                 createdAt: new Date('2022-05-15')
             }
         ]
@@ -25,7 +25,7 @@ const dataArray: RadiologicalExam[] = [
             {
                 idExam: 1,
                 type: 'X-Ray',
-                file: 'xray-102-b1.pdf',
+                files: [],
                 createdAt: new Date('2022-06-10')
             }
         ]

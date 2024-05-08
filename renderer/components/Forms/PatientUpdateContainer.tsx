@@ -1,4 +1,4 @@
-import {Patient} from "../../interfaces";
+import {Analysis, Exam, Patient} from "../../interfaces";
 import {useRouter} from "next/router";
 import {useState} from "react";
 import PersonalInfoForm, {PersonalInfoFormData} from "./Patient/PersonalInfoForm";
@@ -40,8 +40,8 @@ const PatientUpdateContainer: React.FC<PatientUpdateContainerProps> = ({ patient
 
     const [drugAllergies, setDrugAllergies] = useState<string[]>([]);
     const [chronicDiseases, setChronicDiseases] = useState<string[]>([]);
-    const [exams, setExams] = useState<string[]>([]);
-    const [analysis, setAnalysis] = useState<string[]>([]);
+    const [exams, setExams] = useState<Exam[]>([]);
+    const [analysis, setAnalysis] = useState<Analysis[]>([]);
 
     const handlePersonalInfoSubmit = (data: PersonalInfoFormData) => {
         setPersonalInfo(data);
@@ -58,12 +58,12 @@ const PatientUpdateContainer: React.FC<PatientUpdateContainerProps> = ({ patient
         goNext();
     }
 
-    const handleExamsSubmit = (exams: string[]) => {
+    const handleExamsSubmit = (exams: Exam[]) => {
         setExams(exams);
         goNext();
     }
 
-    const handleAnalysisSubmit = (analysis: string[]) => {
+    const handleAnalysisSubmit = (analysis: Analysis[]) => {
         setAnalysis(analysis);
         goNext();
     }
