@@ -50,10 +50,11 @@ const ScanQRPage = () => {
             border: 'none',
             borderRadius: '4px',
             cursor: 'pointer',
+            position: 'relative' as const,
         },
         image: {
             width: '100%',
-            maxWidth: '200px',
+            maxWidth: '400px',
             display: 'block',
             margin: 'auto',
         },
