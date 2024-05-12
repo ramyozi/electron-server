@@ -10,7 +10,9 @@ const DoctorDashboard = () => {
         borderRadius: '5px',
         cursor: 'pointer',
         transition: 'transform 0.2s ease-in-out',
-        margin: '5px'
+        margin: '5px',
+        display: 'flex',
+        flexDirection: 'column' as 'column',
     };
 
     return (

@@ -9,7 +9,9 @@ const AdminDashboard = () => {
         borderRadius: '8px',
         cursor: 'pointer',
         transition: 'opacity 0.3s ease-in-out',
-        margin: '10px'
+        margin: '10px',
+        display: 'flex',
+        flexDirection: 'column' as 'column',
     };
 
     return (

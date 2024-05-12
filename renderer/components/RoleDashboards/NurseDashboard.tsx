@@ -29,7 +29,9 @@ const NurseDashboard = () => {
             backgroundColor: '#E3F2FD',
             padding: '20px',
             borderRadius: '10px',
-            textAlign: 'center' as 'center'
+            textAlign: 'center' as 'center',
+            display: 'flex',
+            flexDirection: 'column' as 'column',
         }}>
             <h2>Tableau de Bord de l'Infirmière</h2>
             <Link href="/scan-qr">

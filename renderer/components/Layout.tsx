@@ -28,9 +28,7 @@ const Layout = ({ children, title = 'Patientcare', user }: Props) => {
             return (
                 <>
                     <Link href="/"><a className={isActive('/')} >Connexion</a></Link>
-                    {' '}|{' '}
                     <Link href="/about"><a className={isActive('/about')} >A Propos</a></Link>
-                    {' '}|{' '}
                     <Link href="/contact"><a className={isActive('/contact')} >Contact</a></Link>
                 </>
             );

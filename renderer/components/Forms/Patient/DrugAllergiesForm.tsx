@@ -41,6 +41,11 @@ const DrugAllergiesForm: React.FC<DrugAllergiesFormProps> = ({ onSubmit, initial
                             </a>
                         </li>
                     ))}
+                    {
+                        allergies.length === 0 && (
+                            <li style={{ color: 'gray', fontStyle: 'italic' }}>Aucune allergie médicamenteuse</li>
+                        )
+                    }
                 </ul>
             </div>
             <div className="form-container" style={{ flex: 1, backgroundColor: '#fff', borderRadius: '8px', padding: '20px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)' }}>

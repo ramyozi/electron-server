@@ -83,6 +83,7 @@ const PageContact = () => {
                             placeholder="Votre Message"
                             required
                             className={styles.textarea}
+
                         />
                     </div>
                     <button type="submit" className={styles.button}>Envoyer</button>

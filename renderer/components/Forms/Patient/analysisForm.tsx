@@ -58,7 +58,8 @@ const AnalysisForm: React.FC<AnalysisFormProps> = ({ onSubmit, initialData }) =>
 
     return (
         <div className="analysis-form-container">
-            <label style={{ display: 'block', marginBottom: '10px' }}>Type d'analyse: </label>
+            <h1>Gestion des Analyses Médicales</h1>
+            <label style={{display: 'block', marginBottom: '10px'}}>Type d'analyse: </label>
             <Select
                 options={topAnalyses}
                 value={selectedAnalysis}
@@ -73,11 +74,12 @@ const AnalysisForm: React.FC<AnalysisFormProps> = ({ onSubmit, initialData }) =>
                         onChange={(e) => setCustomAnalysis(e.target.value)}
                         placeholder="Précisez le type d'analyse"
                     />
-                    <FaPlus onClick={handleAddAnalysis} style={{ cursor: 'pointer' }} />
+                    <FaPlus onClick={handleAddAnalysis} style={{cursor: 'pointer'}}/>
                 </div>
             )}
+            <h2>Analyses</h2>
             {analysis.map((an, index) => (
-                <div key={index} style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px' }}>
+                <div key={index} style={{border: '1px solid #ccc', padding: '10px', marginBottom: '10px'}}>
                     <span>
                         {an.analysisType} - {an.createdAt.toLocaleDateString()}
                     </span>
@@ -87,10 +89,17 @@ const AnalysisForm: React.FC<AnalysisFormProps> = ({ onSubmit, initialData }) =>
                             multiple
                             onChange={(e) => e.target.files && handleFileChange(e.target.files, an)}
                         />
-                        <FaTrash onClick={() => handleDeleteAnalysis(an.idAnalysis)} style={{ cursor: 'pointer', marginLeft: '10px' }} />
+                        <FaTrash onClick={() => handleDeleteAnalysis(an.idAnalysis)}
+                                 style={{cursor: 'pointer', marginLeft: '10px'}}/>
                     </div>
                 </div>
             ))}
+            {
+                analysis.length === 0 && (
+                    <div style={{color: 'gray', fontStyle: 'italic'}}>Aucune analyse médicale</div>
+
+                )
+            }
         </div>
     );
 };

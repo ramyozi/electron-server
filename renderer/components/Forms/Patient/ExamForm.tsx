@@ -50,13 +50,14 @@ const ExamForm = ({ onSubmit, initialData }) => {
 
     return (
         <div className="exam-form-container">
+            <h1>Gestion des Examens Médicaux</h1>
             <div style={{ marginBottom: '20px' }}>
-                <label style={{ display: 'block', marginBottom: '10px' }}>Le type d'examen: </label>
+                <label style={{ display: 'block', marginBottom: '10px' }}>Type d'examen:</label>
                 <Select
-                    options={topExams}
+                    options={topExams.map(exam => ({ value: exam, label: exam }))}
                     value={selectedExam}
                     onChange={handleSelectChange}
-                    placeholder="Selectionner un examen"
+                    placeholder="Sélectionner un examen"
                 />
                 {selectedExam && selectedExam.value === "Autre" && (
                     <div>
@@ -64,12 +65,13 @@ const ExamForm = ({ onSubmit, initialData }) => {
                             type="text"
                             value={customExam}
                             onChange={(e) => setCustomExam(e.target.value)}
-                            placeholder="Specifiez le nom de l'examen"
+                            placeholder="Spécifiez le nom de l'examen"
                         />
                         <FaPlus onClick={handleAddCustomExam} style={{ cursor: 'pointer' }} />
                     </div>
                 )}
             </div>
+            <h2>Liste des Examens</h2>
             {exams.map((exam, index) => (
                 <div key={index} style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px' }}>
                     <div style={{ fontWeight: 'bold', marginBottom: '5px' }}>
@@ -90,6 +92,11 @@ const ExamForm = ({ onSubmit, initialData }) => {
                     </div>
                 </div>
             ))}
+            {
+                exams.length === 0 && (
+                    <div style={{ color: 'gray', fontStyle: 'italic' }}>Aucun examen médical</div>
+                )
+            }
         </div>
     );
 };
