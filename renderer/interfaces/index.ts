@@ -45,9 +45,9 @@ export type MedicalIdentity = {
   idPatient: number;
   weight: number;
   height: number;
+  lifestyle: string[];
+  riskFactors: string[];
   bloodType: string;
-  drugAllergies: string[];
-  chronicDiseases: string[];
   bloodSugarLevel: number;
   bloodPressure: string;
 };

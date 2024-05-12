@@ -4,6 +4,8 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { User } from "../interfaces";
+import {GiFrayedArrow} from "react-icons/gi";
+import {FaArrowCircleLeft, FaArrowCircleRight} from "react-icons/fa";
 
 type Props = {
     children: ReactNode;
@@ -21,6 +23,10 @@ const Layout = ({ children, title = 'Patientcare', user }: Props) => {
 
     const isActive = (pathname) => {
         return router.pathname === pathname ? 'nav-link active' : 'nav-link';
+    };
+
+    const goBack = () => {
+        router.back();
     };
 
     const renderLinks = () => {
@@ -41,7 +47,7 @@ const Layout = ({ children, title = 'Patientcare', user }: Props) => {
                 {user.role === 'admin' && (
                     <Link href="/create-user"><a className={isActive('/create-user')} >Ajouter un Utilisateur</a></Link>
                 )}
-                {user.role === 'nurse' && (
+                {(user.role === 'nurse' || user.role === 'doctor') && (
                     <Link href="/create-patient"><a className={isActive('/create-patient')} >Ajouter un Patient</a></Link>
                 )}
                 <div className="dropdown">
@@ -89,7 +95,29 @@ const Layout = ({ children, title = 'Patientcare', user }: Props) => {
                     </nav>
                 </div>
             </header>
-            <main>{children}</main>
+            <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                padding: '10px 20px',
+            }}>
+                {
+                    router.pathname !== '/signin' && (
+                        <button onClick={goBack} style={{
+                            border: 'none',
+                            background: 'transparent',
+                            color: 'black',
+                            cursor: 'pointer',
+                            textUnderlineOffset: 'none'
+                        }}>
+                            <FaArrowCircleLeft/> Retour
+                        </button>
+                    )
+                }
+            </div>
+            <main>
+                {children}
+            </main>
             <footer style={{position: 'fixed', bottom: 0, width: '100%', background: '#f0f0f0', padding: '10px 0'}}>
                 <hr/>
                 <span>© {new Date().getFullYear()} - Tous droits réservés à Patientcare</span>

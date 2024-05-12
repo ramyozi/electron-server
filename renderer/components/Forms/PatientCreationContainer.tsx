@@ -7,11 +7,13 @@ import {useRouter} from "next/router";
 import {useState} from "react";
 import AnalysisForm from "./Patient/analysisForm";
 import {FaCheck, FaChevronLeft, FaChevronRight} from "react-icons/fa";
-import {Analysis, Exam} from "../../interfaces";
+import {Analysis, Exam, MedicalIdentity} from "../../interfaces";
+import MedicalInfoForm, {MedicalInfoFormData} from "./Patient/MedicalInfoForm";
 
 
 const stepComponents = [
     { name: "Informations Personnelles", component: PersonalInfoForm },
+    { name: "Informations Médicales", component: MedicalInfoForm },
     { name: "Allergies Médicamenteuses", component: DrugAllergiesForm },
     { name: "Maladies Chroniques", component: ChronicDiseasesForm },
     { name: "Examens", component: ExamForm },
@@ -34,7 +36,18 @@ const PatientCreationContainer = () => {
         socialSecurityNumber: '',
     };
 
+    const intialMedicalInfo: MedicalInfoFormData = {
+        weight: 0,
+        height: 0,
+        lifestyle: [],
+        riskFactors: [],
+        bloodType: '',
+        bloodSugarLevel: 0,
+        bloodPressure: '',
+    };
+
     const [personalInfo, setPersonalInfo] = useState<PersonalInfoFormData>(initialPersonalInfo);
+    const [medicalInfo, setMedicalInfo] = useState<MedicalInfoFormData>(intialMedicalInfo);
     const [drugAllergies, setDrugAllergies] = useState<string[]>([]);
     const [chronicDiseases, setChronicDiseases] = useState<string[]>([]);
     const [exams, setExams] = useState<Exam[]>([]);
@@ -44,6 +57,11 @@ const PatientCreationContainer = () => {
         setPersonalInfo(data);
         // TODO: Save data to backend
         router.push('/patients');
+    };
+
+    const handleMedicalInfoSubmit = (data: MedicalIdentity) => {
+        setMedicalInfo(data);
+        goNext();
     };
 
     const handleDrugAllergiesSubmit = (data: string[]) => {
@@ -79,14 +97,16 @@ const PatientCreationContainer = () => {
             case 0:
                 return <PersonalInfoForm initialData={personalInfo} onSubmit={handlePersonalInfoSubmit} />;
             case 1:
-                return <DrugAllergiesForm initialData={drugAllergies} onSubmit={handleDrugAllergiesSubmit} />;
+                return <MedicalInfoForm initialData={medicalInfo} onSubmit={handleMedicalInfoSubmit} />;
             case 2:
-                return <ChronicDiseasesForm initialData={chronicDiseases} onSubmit={handleChronicDiseasesSubmit} />;
+                return <DrugAllergiesForm initialData={drugAllergies} onSubmit={handleDrugAllergiesSubmit} />;
             case 3:
-                return <ExamForm initialData={exams} onSubmit={handleExamsSubmit} />;
+                return <ChronicDiseasesForm initialData={chronicDiseases} onSubmit={handleChronicDiseasesSubmit} />;
             case 4:
-                return <AnalysisForm initialData={analysis} onSubmit={handleAnalysisSubmit} />;
+                return <ExamForm initialData={exams} onSubmit={handleExamsSubmit} />;
             case 5:
+                return <AnalysisForm initialData={analysis} onSubmit={handleAnalysisSubmit} />;
+            case 6:
                 return <PatientSummary personalInfo={personalInfo} drugAllergies={drugAllergies}
                                        chronicDiseases={chronicDiseases} onSubmit={
                     () => {
