@@ -1,72 +1,76 @@
 import React, { useState, useEffect } from 'react';
 import bodyPartsData from '../../../public/data/chronicDiseases.json';
-import Image from "next/image";
+import BodyDiagram from "../../UI/body/body-diagram";
+import Select from "react-select";
+import {AiOutlineMinusCircle, AiOutlinePlusCircle} from "react-icons/ai";
 
 type ChronicDiseasesFormProps = {
     onSubmit: (diseases: string[]) => void;
     initialData: string[];
 };
 
-const ChronicDiseasesForm: React.FC<ChronicDiseasesFormProps> = ({ onSubmit, initialData }) => {
-    const [selectedPart, setSelectedPart] = useState('');
-    const [selectedDisease, setSelectedDisease] = useState('');
-    const [diseases, setDiseases] = useState<string[]>(initialData);
-    const [availableDiseases, setAvailableDiseases] = useState<string[]>([]);
+const ChronicDiseasesForm = ({ onSubmit, initialData }: ChronicDiseasesFormProps) => {
+    const [selectedPart, setSelectedPart] = useState(null);
+    const [diseases, setDiseases] = useState(initialData);
+    const [options, setOptions] = useState([]);
+    const [showDropdown, setShowDropdown] = useState(false);
 
     useEffect(() => {
-        if (selectedPart) {
-            const part = bodyPartsData.bodyParts.find(part => part.id === selectedPart);
-            setAvailableDiseases(part ? part.diseases : []);
-        }
+        const part = bodyPartsData.bodyParts.find(part => part.id === selectedPart);
+        setOptions(part ? part.diseases.map(disease => ({ value: disease, label: disease })) : []);
+        setShowDropdown(!!selectedPart);
     }, [selectedPart]);
 
-    const handleBodyPartClick = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
-        const partId = (event.target as SVGPathElement).id;
-        setSelectedPart(partId);
+    const handlePartClick = (partId) => {
+        setSelectedPart(selectedPart === partId ? null : partId);
     };
 
-    const handleDiseaseSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedDisease(event.target.value);
+    const handleChange = (selectedOption) => {
+        setDiseases([...diseases, selectedOption.value]);
+        setSelectedPart(null);
     };
 
-    const handleAddDisease = () => {
-        if (selectedDisease && !diseases.includes(selectedDisease)) {
-            setDiseases([...diseases, selectedDisease]);
-            setSelectedDisease('');
-        }
-    };
-
-    const handleRemoveDisease = (disease: string) => {
+    const handleRemoveDisease = (disease) => {
         setDiseases(diseases.filter(d => d !== disease));
     };
 
-    const handleSubmit = (event: React.FormEvent) => {
-        event.preventDefault();
-        onSubmit(diseases);
-    };
-
     return (
-        <form onSubmit={handleSubmit}>
-            <div style={{ margin: '20px' }}>
-                <Image src="/public/SVGs/body.svg" alt="body" layout={"fill"} />
+        <div style={{ display: 'flex', height: '100vh', alignItems: 'center' }}>
+            <div style={{width: '50%'}}>
+                <h1>Sélectionnez une partie du corps</h1>
+                <p data-tip="Cliquez sur une partie du corps pour voir les maladies associées">Aide: Passez la souris
+                    ici !</p>
+                <BodyDiagram onClick={handlePartClick} selectedPart={selectedPart}/>
             </div>
-            <div>
-                <label htmlFor="diseases">Select Disease:</label>
-                <select id="diseases" value={selectedDisease} onChange={handleDiseaseSelect} disabled={!selectedPart}>
-                    <option value="">Select a Disease</option>
-                    {availableDiseases.map(disease => (
-                        <option key={disease} value={disease}>{disease}</option>
+            <div style={{width: '50%', position: 'relative'}}>
+                {showDropdown && (
+                    <div style={{position: 'absolute', left: 100, top: -200}}>
+                        <Select
+                            options={options}
+                            onChange={handleChange}
+                            placeholder="Sélectionner une maladie"
+                            autoFocus={true}
+                            styles={
+                                {
+                                    control: (styles) => ({...styles, width: 300}),
+                                    menu: (styles) => ({...styles, width: 300}),
+                                }
+                            }
+                        />
+                    </div>
+                )}
+                <h2>La liste des maladies chroniques</h2>
+                <ul>
+                    {diseases.map((disease, index) => (
+                        <li key={index}>
+                            {disease}
+                            <AiOutlineMinusCircle onClick={() => handleRemoveDisease(disease)}
+                                                  style={{cursor: 'pointer', color: 'red', marginLeft: '10px'}}/>
+                        </li>
                     ))}
-                </select>
-                <button type="button" onClick={handleAddDisease} disabled={!selectedDisease}>Add Disease</button>
+                </ul>
             </div>
-            <ul>
-                {diseases.map((disease, index) => (
-                    <li key={index}>{disease} <button onClick={() => handleRemoveDisease(disease)}>Remove</button></li>
-                ))}
-            </ul>
-            <button type="submit">Submit Diseases</button>
-        </form>
+        </div>
     );
 };
 

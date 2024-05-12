@@ -34,6 +34,7 @@ app.on('ready', async () => {
   })
 
   mainWindow.loadURL('http://localhost:3000/')
+  mainWindow.maximize();
 })
 
 // Quit the app once all windows are closed
