@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import bodyPartsData from '../../../public/data/chronicDiseases.json';
 import BodyDiagram from "../../UI/body/body-diagram";
 import Select from "react-select";
-import {AiOutlineMinusCircle, AiOutlinePlusCircle} from "react-icons/ai";
+import {AiOutlineMinusCircle} from "react-icons/ai";
 
 type ChronicDiseasesFormProps = {
     onSubmit: (diseases: string[]) => void;
@@ -38,8 +38,6 @@ const ChronicDiseasesForm = ({ onSubmit, initialData }: ChronicDiseasesFormProps
         <div style={{ display: 'flex', height: '100vh', alignItems: 'center' }}>
             <div style={{width: '50%'}}>
                 <h1>Sélectionnez une partie du corps</h1>
-                <p data-tip="Cliquez sur une partie du corps pour voir les maladies associées">Aide: Passez la souris
-                    ici !</p>
                 <BodyDiagram onClick={handlePartClick} selectedPart={selectedPart}/>
             </div>
             <div style={{width: '50%', position: 'relative'}}>
@@ -68,6 +66,7 @@ const ChronicDiseasesForm = ({ onSubmit, initialData }: ChronicDiseasesFormProps
                                                   style={{cursor: 'pointer', color: 'red', marginLeft: '10px'}}/>
                         </li>
                     ))}
+                    {diseases.length === 0 && <li>Aucune maladie chronique</li>}
                 </ul>
             </div>
         </div>

@@ -12,6 +12,15 @@ const PatientSummary = ({
         chronicDiseases: false,
     });
 
+    const isSubmitDisabled = !personalInfo.lastName ||
+        !personalInfo.firstName ||
+        !personalInfo.dateOfBirth ||
+        !personalInfo.placeOfBirth ||
+        !personalInfo.address ||
+        !personalInfo.sex ||
+        !personalInfo.phoneNumber ||
+        !personalInfo.socialSecurityNumber;
+
     const toggleSection = (section) => {
         setExpandedSections(prevState => ({
             ...prevState,
@@ -95,7 +104,11 @@ const PatientSummary = ({
             { chronicDiseases.length > 0 && renderSection('Maladies Chroniques', renderChronicDiseasesTable(), 'chronicDiseases') }
             <br/>
 
-            <button onClick={onSubmit}>Soumettre le Dossier</button>
+            <button onClick={onSubmit} disabled={isSubmitDisabled}
+            style={ isSubmitDisabled ? { backgroundColor: 'gray', cursor: 'not-allowed' , visibility: 'hidden'} : {backgroundColor: 'green', cursor: 'pointer'}
+
+            }
+            >Soumettre le Dossier</button>
         </div>
     );
 };

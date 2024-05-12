@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaPlus, FaTrash, FaSave } from 'react-icons/fa';
+import {AiOutlineMinusCircle} from "react-icons/ai";
 
 export type DrugAllergyFormData = string[];
 
@@ -33,10 +34,10 @@ const DrugAllergiesForm: React.FC<DrugAllergiesFormProps> = ({ onSubmit, initial
                 <h2>Liste des Allergies Médicamenteuses</h2>
                 <ul>
                     {allergies.map((allergy, index) => (
-                        <li key={index} style={{ margin: '10px 0' }}>
+                        <li key={index} style={{ margin: '' }}>
                             {allergy}
-                            <a onClick={() => handleDelete(index)} style={{ color: 'red', cursor: 'pointer', marginLeft: '10px' }}>
-                                <FaTrash />
+                            <a onClick={() => handleDelete(index)} style={{ color: 'red', cursor: 'pointer' }}>
+                                <AiOutlineMinusCircle style={{cursor: 'pointer', color: 'red', marginLeft: '10px'}}/>
                             </a>
                         </li>
                     ))}

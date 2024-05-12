@@ -60,7 +60,7 @@ p, label {
     display: block;
 }
 
-input, select, button, textarea {
+input, select,  textarea {
     padding: 10px;
     margin: 10px 0;
     display: block;
@@ -71,19 +71,23 @@ input, select, button, textarea {
 }
 
 button {
-    background: linear-gradient(45deg, #2196F3, #21CBF3);
-    color: white;
-    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
     cursor: pointer;
-    transition: transform 0.3s, background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 button:hover {
-    background: linear-gradient(45deg, #21CBF3, #2196F3);
-    transform: scale(1.05);
+    background-color: #0056b3;
+    border-color: #0056b3;
 }
+
 
 footer {
     text-align: center;
