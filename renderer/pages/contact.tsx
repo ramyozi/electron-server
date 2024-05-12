@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import Layout from '../components/Layout';
+import styles from '../public/styles/SignInForm.module.css';
+import {FaEnvelope, FaPen, FaUser} from "react-icons/fa";
+import Image from "next/image";
+
 
 const PageContact = () => {
     const [formData, setFormData] = useState({
@@ -36,36 +40,52 @@ const PageContact = () => {
 
     return (
         <Layout title="Contactez-nous | Patientcare">
-            <div style={{ maxWidth: '500px', margin: '0 auto', padding: '20px' }}>
-                <h1>Nous Contacter</h1>
-                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
-                    <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        placeholder="Votre Nom"
-                        required
-                        style={{ margin: '10px 0', padding: '10px' }}
-                    />
-                    <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="Votre Adresse Email"
-                        required
-                        style={{ margin: '10px 0', padding: '10px' }}
-                    />
-                    <textarea
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        placeholder="Votre Message"
-                        required
-                        style={{ height: '100px', margin: '10px 0', padding: '10px' }}
-                    />
-                    <button type="submit" style={{ padding: '10px', backgroundColor: '#007bff', color: 'white', cursor: 'pointer' }}>Envoyer le Message</button>
+            <div className={styles.container} style={
+                {marginTop: '90px'}
+            }>
+                <div className={styles.logo}>
+                    <Image src="/images/logo.jpg" alt="Logo" width={250} height={250}/>
+                </div>
+                <p className={styles.explanation}>
+                    Utilisez ce formulaire pour nous contacter pour toute question ou préoccupation. Nous vous répondrons dans les plus brefs délais.
+                </p>
+                <form className={`${styles.form} ${styles.contactFormLarge}`} onSubmit={handleSubmit}>
+                    <div className={styles.field}>
+                        <FaUser className={styles.icon} size={20}/>
+                        <input
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            placeholder="Votre Nom"
+                            required
+                            className={styles.input}
+                        />
+                    </div>
+                    <div className={styles.field}>
+                        <FaEnvelope className={styles.icon} size={20}/>
+                        <input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            placeholder="Votre Adresse Email"
+                            required
+                            className={styles.input}
+                        />
+                    </div>
+                    <div className={styles.field}>
+                        <FaPen className={styles.icon} size={20}/>
+                        <textarea
+                            name="message"
+                            value={formData.message}
+                            onChange={handleChange}
+                            placeholder="Votre Message"
+                            required
+                            className={styles.textarea}
+                        />
+                    </div>
+                    <button type="submit" className={styles.button}>Envoyer</button>
                 </form>
             </div>
         </Layout>

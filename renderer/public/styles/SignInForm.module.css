@@ -1,49 +1,109 @@
+
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    background-color: #f0f2f5;
+    height: 70vh;
+    background-color: #ffffff;
 }
 
-.form {
-    padding: 40px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    width: 340px;
+.logo {
+    margin-bottom: 1rem;
+}
+
+.explanation {
     text-align: center;
+    margin-bottom: 2rem;
+    color: #666;
+    font-size: 1rem;
 }
 
 .title {
-    font-size: 28px;
+    font-size: 2rem;
     color: #333;
-    margin-bottom: 30px;
+    margin-bottom: 1rem;
     font-weight: bold;
+}
+
+.form {
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.field {
+    position: relative;
+    margin-bottom: 1rem;
 }
 
 .input {
     width: 100%;
-    padding: 12px;
-    margin-bottom: 20px;
+    padding: 0.8rem 0.8rem 0.8rem 3rem;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.textarea {
+    width: 100%;
+    padding: 0.8rem 0.8rem 0.8rem 3rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    resize: vertical;
+    height: 200px;
+}
+
+.contactFormLarge {
+    width: 200%;
+    max-width: 800px;
+    padding: 3rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
 }
 
 .button {
     width: 100%;
-    padding: 12px;
+    padding: 1rem;
     background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
+    font-size: 1rem;
     transition: background-color 0.2s ease;
-    font-size: 16px;
+    margin-top: 30px;
 }
 
 .button:hover {
     background-color: #0056b3;
 }
+
+.error-message {
+    color: red;
+    font-size: 1rem;
+}
+
+.checkboxContainer {
+    display: flex;
+}
+
+.checkbox {
+}
+
+.checkboxLabel {
+    font-size: 1rem;
+}
+

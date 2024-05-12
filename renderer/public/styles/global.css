@@ -1,10 +1,27 @@
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 
-body, h1, h2, h3, p, form, table {
+* {
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif;
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+
+body {
+    line-height: 1.6;
+    color: #333;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    color: #333;
+}
+
+p, label {
+    font-size: 16px;
+    line-height: 1.5;
 }
 
 .nav-bar {
@@ -30,12 +47,6 @@ body, h1, h2, h3, p, form, table {
     display: inline-block;
 }
 
-.dropbtn {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-
 .dropdown-content {
     display: none;
     position: absolute;
@@ -43,13 +54,6 @@ body, h1, h2, h3, p, form, table {
     min-width: 160px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     z-index: 1;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
 }
 
 .dropdown:hover .dropdown-content {
@@ -62,7 +66,8 @@ input, select, button, textarea {
     display: block;
     width: 95%;
     border: 1px solid #ccc;
-    border-radius: 25px;
+    border-radius: 4px;
+    font-size: 16px;
 }
 
 button {
@@ -75,24 +80,9 @@ button {
     letter-spacing: 1px;
 }
 
-
 button:hover {
     background: linear-gradient(45deg, #21CBF3, #2196F3);
     transform: scale(1.05);
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-table, th, td {
-    border: 1px solid black;
-}
-
-th, td {
-    text-align: left;
-    padding: 8px;
 }
 
 footer {
@@ -101,96 +91,13 @@ footer {
     background-color: #f0f0f0;
 }
 
-.patient-creation-container {
-    display: flex;
-    height: 100vh;
-}
-
-.menu {
-    width: 200px;
-    background: #f4f4f4;
-    padding: 20px;
-}
-
-.menu-item {
-    cursor: pointer;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-.menu-item.active {
-    background: #e2e2e2;
-}
-
-.form-container {
-    flex-grow: 1;
-    padding: 20px;
-}
-
 .list-form-container {
     display: flex;
     justify-content: space-between;
 }
 
-.list-container {
+.list-container, .form-container {
     width: 50%;
-}
-
-.form-container {
-    width: 50%;
-}
-
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-li {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.navigation-buttons {
-    text-align: center;
-}
-
-button {
-    background-color: cornflowerblue;
-    color: white;
-    border: none;
-    cursor: pointer;
-    padding: 10px 20px;
-    margin: 0 10px;
-}
-
-button:hover {
-    opacity: 0.8;
-}
-
-input[type="text"] {
-    padding: 10px;
-    margin: 10px 0;
-    display: block;
-    width: 95%;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    transition: border-color 0.3s ease;
-}
-
-input[type="text"]:focus {
-    border-color: cornflowerblue;
-    outline: none;
-}
-
-
-.patient-list {
-    margin-top: 20px;
-}
-
-.patient-list-item {
-    margin-bottom: 10px;
 }
 
 .patient-list-item a {
@@ -206,14 +113,6 @@ input[type="text"]:focus {
 .patient-list-item a:hover {
     background-color: #f0f0f0;
 }
-.search-input {
-    width: 100%;
-    padding: 8px;
-    margin: 10px 0;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-}
 
 .patient-dropdown {
     position: absolute;
@@ -225,14 +124,6 @@ input[type="text"]:focus {
     overflow-y: auto;
     border-radius: 4px;
     border: 1px solid #ddd;
-}
-
-.dropdown-item {
-    display: block;
-    padding: 12px 20px;
-    text-decoration: none;
-    color: black;
-    border-bottom: 1px solid #f0f0f0;
 }
 
 .dropdown-item:hover {
