@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 
 import {Patient, User} from '../../interfaces'
+import {FaEye} from "react-icons/fa";
 
 type Props = {
     patient: Patient
@@ -9,8 +10,11 @@ type Props = {
 
 const styles = {
     td: {
-        padding: '10px',
-        border: '1px solid #ddd',
+        padding: '10px 15px',
+        border: '1px solid #e0e0e0',
+        textAlign: 'left' as 'left',
+        fontSize: '14px',
+
     },
     link: {
         color: '#065ea2',
@@ -31,7 +35,9 @@ const PatientListItem = ({ patient }: Props) => (
         <td style={styles.td}>{patient.socialSecurityNumber}</td>
         <td style={styles.td}>
             <Link href={`/patient/${patient.idPatient}`}>
-                <a style={styles.link}>Accéder au dossier</a>
+                <a style={styles.link}>
+                    <FaEye />
+                </a>
             </Link>
         </td>
     </tr>

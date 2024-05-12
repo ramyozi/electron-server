@@ -40,14 +40,17 @@ const Patients = ({ patients }: Props) => {
         table: {
             width: '100%',
             borderCollapse: 'collapse' as 'collapse',
-            margin: '20px 0'
+            overflowX: 'auto' as 'auto',
+            tableLayout: 'fixed' as 'fixed'
         },
         th: {
             backgroundColor: '#f2f2f2',
             color: '#333',
-            padding: '10px 15px',
-            border: '1px solid #ddd',
-            textAlign: 'left' as 'left'
+            padding: '12px 15px',
+            border: '1px solid #e0e0e0',
+            fontSize: '14px',
+            textAlign: 'left' as 'left',
+            whiteSpace: 'nowrap',
         }
     };
 
@@ -56,16 +59,16 @@ const Patients = ({ patients }: Props) => {
             <table style={styles.table}>
                 <thead>
                 <tr>
-                    <th style={styles.th}>ID</th>
-                    <th style={styles.th}>Last Name</th>
-                    <th style={styles.th}>First Name</th>
-                    <th style={styles.th}>Date of Birth</th>
-                    <th style={styles.th}>Address</th>
-                    <th style={styles.th}>Sex</th>
-                    <th style={styles.th}>Phone Number</th>
+                    <th style={styles.th}>Identifiant</th>
+                    <th style={styles.th}>Nom</th>
+                    <th style={styles.th}>Prénom</th>
+                    <th style={styles.th}>Date de naissance</th>
+                    <th style={styles.th}>Adresse</th>
+                    <th style={styles.th}>Sexe</th>
+                    <th style={styles.th}>Numéro de téléphone</th>
                     <th style={styles.th}>Email</th>
-                    <th style={styles.th}>Social Security Number</th>
-                    <th style={styles.th}>Details</th>
+                    <th style={styles.th}>Numéro de sécurité sociale</th>
+                    <th style={styles.th}></th>
                 </tr>
                 </thead>
                 <tbody>

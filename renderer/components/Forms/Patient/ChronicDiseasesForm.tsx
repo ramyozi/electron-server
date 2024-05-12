@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import bodyPartsData from '../../../public/data/chronicDiseases.json';
-import { ReactComponent as BodySVG } from '../../../public/SVGs/body.svg';
 import Image from "next/image";
 
 type ChronicDiseasesFormProps = {

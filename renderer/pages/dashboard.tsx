@@ -40,12 +40,38 @@ const DashboardPage = () => {
         }
     };
 
+    const getGreeting = () => {
+        let greeting = 'Bienvenue de retour,';
+
+        if (user.role === 'admin') {
+            greeting += ' Admin';
+        } else if (user.role === 'nurse') {
+            greeting += user.sex === 'M' ? ' Infirmier' : ' Infirmière';
+        } else if (user.role === 'doctor') {
+            greeting += ' Docteur';
+        } else {
+            greeting += ' Cher Utilisateur';
+        }
+
+        greeting += ` ${user.lastname}!`;
+
+        return greeting;
+    };
+
     return (
         <Layout title="Patientcare" user={user}>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
-                <img src="/images/1.jpg" alt="Dashboard Image" style={{ width: '30%', marginRight: '20px' }} />
-                {renderDashboard()}
+            <div style={{padding: '20px'}}>
+                <h1 style={{
+                    textAlign: 'center',
+                    fontSize: '2rem',
+                    color: '#333',}}>{getGreeting()}</h1>
+
+                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh'}}>
+                    <img src="/images/1.jpg" alt="Dashboard Image" style={{width: '30%', marginRight: '20px'}}/>
+                    {renderDashboard()}
+                </div>
             </div>
+
         </Layout>
 
     );

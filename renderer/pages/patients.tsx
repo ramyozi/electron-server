@@ -12,22 +12,16 @@ type Props = {
 }
 
 const WithInitialProps = ({ items }: Props) => {
-
     const { user } = useUser();
-    const router = useRouter()
+    const router = useRouter();
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredPatients, setFilteredPatients] = useState<Patient[]>([]);
 
     useEffect(() => {
-        if (searchTerm) {
-            const filtered = items.filter(patient =>
-                patient.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                patient.lastName.toLowerCase().includes(searchTerm.toLowerCase())
-            );
-            setFilteredPatients(filtered);
-        } else {
-            setFilteredPatients([]);
-        }
+        setFilteredPatients(searchTerm ? items.filter(patient =>
+            patient.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            patient.lastName.toLowerCase().includes(searchTerm.toLowerCase())
+        ) : []);
     }, [searchTerm, items]);
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,6 +75,7 @@ const WithInitialProps = ({ items }: Props) => {
     );
 };
 
+// Fetching data for static generation
 export async function getStaticProps() {
     const items: Patient[] = await findAll();
     return { props: { items } };

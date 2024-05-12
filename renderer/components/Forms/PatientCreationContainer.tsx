@@ -11,11 +11,11 @@ import {Analysis, Exam} from "../../interfaces";
 
 
 const stepComponents = [
-    { name: "Personal Information", component: PersonalInfoForm },
+    { name: "Informations Personnelles", component: PersonalInfoForm },
     { name: "Allergies Médicamenteuses", component: DrugAllergiesForm },
     { name: "Maladies Chroniques", component: ChronicDiseasesForm },
-    { name: "Exams", component: ExamForm },
-    { name: "Analysis", component: AnalysisForm },
+    { name: "Examens", component: ExamForm },
+    { name: "Analyses", component: AnalysisForm },
     { name: "Récapitulatif", component: PatientSummary }
 ];
 
