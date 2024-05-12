@@ -9,8 +9,17 @@ type DrugAllergiesFormProps = {
     initialData: DrugAllergyFormData;
 };
 
+const mockData = [
+    "Acide Acétylsalicylique",
+    "Paracétamol",
+    "Ibuprofène",
+    "Amoxicilline",
+    "Pénicilline",
+];
+
+
 const DrugAllergiesForm: React.FC<DrugAllergiesFormProps> = ({ onSubmit, initialData }) => {
-    const [allergies, setAllergies] = useState<string[]>(initialData);
+    const [allergies, setAllergies] = useState<string[]>(mockData);
     const [inputValue, setInputValue] = useState("");
 
     const handleAdd = () => {

@@ -3,6 +3,7 @@ import {Analysis} from "../../../interfaces";
 import {FaPlus, FaTrash} from "react-icons/fa";
 import Select from "react-select";
 import topAnalyses from "../../../public/data/analysesTop100.json";
+import {MockAnalyses} from "../../../Mock/mockAnalyses";
 
 
 
@@ -12,7 +13,10 @@ type AnalysisFormProps = {
 };
 
 const AnalysisForm: React.FC<AnalysisFormProps> = ({ onSubmit, initialData }) => {
+/*
     const [analysis, setAnalysis] = useState<Analysis[]>(initialData);
+*/
+    const [analysis, setAnalysis] = useState<Analysis[]>(MockAnalyses);
     const [selectedAnalysis, setSelectedAnalysis] = useState<{ label: string, value: string } | null>(null);
     const [customAnalysis, setCustomAnalysis] = useState("");
 

@@ -1,0 +1,32 @@
+[
+  {
+    "type": "RX",
+    "label": "Radiographie",
+    "icon": "/path/to/rx-icon.png"
+  },
+  {
+    "type": "IRM",
+    "label": "Imagerie par Résonance Magnétique",
+    "icon": "/path/to/irm-icon.png"
+  },
+  {
+    "type": "TDM",
+    "label": "Tomodensitométrie",
+    "icon": "/path/to/tdm-icon.png"
+  },
+  {
+    "type": "ECHOGRAPHIE",
+    "label": "Échographie",
+    "icon": "/path/to/echographie-icon.png"
+  },
+  {
+    "type": "MAMMOGRAPHIE",
+    "label": "Mammographie",
+    "icon": "/path/to/mammographie-icon.png"
+  },
+  {
+    "type": "SCINTIGRAPHIE",
+    "label": "Scintigraphie",
+    "icon": "/path/to/scintigraphie-icon.png"
+  }
+]

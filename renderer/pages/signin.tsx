@@ -19,7 +19,20 @@ const SignInPage = () => {
         const user = dataArray.find(user => user.email === email && user.password === password);
         if (user) {
             login(user);
-            router.push('/dashboard');
+            switch (user.role) {
+                case 'admin':
+                    router.push('/users');
+                    break;
+                case 'nurse':
+                    router.push('/patients');
+                    break;
+                case 'doctor':
+                    router.push('/patients');
+                    break;
+                default:
+                    setError('Role non reconnu');
+            }
+
         } else {
             setError('Adresse e-mail ou mot de passe invalide');
         }

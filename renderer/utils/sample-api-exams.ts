@@ -1,4 +1,3 @@
-/** Dummy user data. */
 import {RadiologicalExam} from "../interfaces";
 
 const dataArray: RadiologicalExam[] = [
@@ -8,13 +7,15 @@ const dataArray: RadiologicalExam[] = [
             {
                 idExam: 11,
                 type: 'X-Ray',
-                files: [],
+                reports: [],
+                imagery: [],
                 createdAt: new Date('2022-04-12')
             },
             {
                 idExam: 12,
                 type: 'MRI',
-                files: [],
+                reports: [],
+                imagery: [],
                 createdAt: new Date('2022-05-15')
             }
         ]
@@ -25,7 +26,8 @@ const dataArray: RadiologicalExam[] = [
             {
                 idExam: 1,
                 type: 'X-Ray',
-                files: [],
+                reports: [],
+                imagery: [],
                 createdAt: new Date('2022-06-10')
             }
         ]
@@ -61,4 +63,5 @@ export const deleteExam = async (idExam: string): Promise<void> => {
         dataArray.splice(index, 1);
     }
 };
+
 

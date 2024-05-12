@@ -3,10 +3,15 @@ import Select from "react-select";
 import topExams from "../../../public/data/examsTop100.json";
 import {FaPlus, FaTrash, FaUpload} from "react-icons/fa";
 import {Exam} from "../../../interfaces";
+import {MockExams} from "../../../Mock/mockExams";
+
+
+
 
 
 const ExamForm = ({ onSubmit, initialData }) => {
-    const [exams, setExams] = useState<Exam[]>(initialData);
+    /*const [exams, setExams] = useState<Exam[]>(initialData);*/
+    const [exams, setExams] = useState<Exam[]>(MockExams);
     const [selectedExam, setSelectedExam] = useState(null);
     const [customExam, setCustomExam] = useState("");
 

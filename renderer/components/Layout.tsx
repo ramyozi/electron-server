@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { User } from "../interfaces";
 import {GiFrayedArrow} from "react-icons/gi";
 import {FaArrowCircleLeft, FaArrowCircleRight} from "react-icons/fa";
+import SidebarComponent from "./UI/SidebarComponent";
 
 type Props = {
     children: ReactNode;
@@ -42,7 +43,6 @@ const Layout = ({ children, title = 'Patientcare', user }: Props) => {
 
         return (
             <>
-                <Link href="/dashboard"><a className={isActive('/dashboard')} >Tableau de Bord</a></Link>
                 <Link href={user.role === 'admin' ? "/users" : "/patients"}><a className={isActive(user.role === 'admin' ? "/users" : "/patients")} >{user.role === 'admin' ? "Utilisateurs" : "Patients"}</a></Link>
                 {user.role === 'admin' && (
                     <Link href="/create-user"><a className={isActive('/create-user')} >Ajouter un Utilisateur</a></Link>
@@ -83,7 +83,9 @@ const Layout = ({ children, title = 'Patientcare', user }: Props) => {
                     maxWidth: '1200px',
                     margin: '0 auto'
                 }}>
-                    <Image src="/images/icon.png" alt="Company Logo" width={60} height={40}/>
+                    <Image src="/images/icon.png" alt="Company Logo" width={60} height={40} style={{
+                        position: 'absolute',
+                    }}/>
                     <nav style={{
                         display: 'flex',
                         justifyContent: 'space-around',
@@ -102,7 +104,7 @@ const Layout = ({ children, title = 'Patientcare', user }: Props) => {
                 padding: '10px 20px',
             }}>
                 {
-                    router.pathname !== '/signin' && (
+                    (router.pathname !== '/signin' && router.pathname !== '/users' && router.pathname !== '/patients') && (
                         <button onClick={goBack} style={{
                             border: 'none',
                             background: 'transparent',
@@ -115,9 +117,32 @@ const Layout = ({ children, title = 'Patientcare', user }: Props) => {
                     )
                 }
             </div>
-            <main>
-                {children}
-            </main>
+            {
+                user && (
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'auto 1fr',
+                        minHeight: '100vh',
+                    }}>
+                        <SidebarComponent user={user}/>
+                        <main style={{
+                            "padding": "30px",
+                        }}>
+                            {children}
+                        </main>
+                    </div>
+                )
+            }
+            {
+                !user && (
+                    <main style={{
+                        "padding": "20px",
+                    }}>
+                        {children}
+                    </main>
+                )
+            }
+
             <footer style={{position: 'fixed', bottom: 0, width: '100%', background: '#f0f0f0', padding: '10px 0'}}>
                 <hr/>
                 <span>© {new Date().getFullYear()} - Tous droits réservés à Patientcare</span>

@@ -1,11 +1,10 @@
 // pages/dashboard.tsx
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '../components/Layout';
 import AdminDashboard from '../components/RoleDashboards/AdminDashboard';
 import NurseDashboard from '../components/RoleDashboards/NurseDashboard';
 import DoctorDashboard from '../components/RoleDashboards/DoctorDashboard';
-import { User } from '../interfaces';
 import {useUser} from "../context/UserContext";
 
 const DashboardPage = () => {
@@ -71,7 +70,6 @@ const DashboardPage = () => {
                     {renderDashboard()}
                 </div>
             </div>
-
         </Layout>
 
     );
