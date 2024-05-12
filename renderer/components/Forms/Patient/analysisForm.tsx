@@ -56,7 +56,15 @@ const AnalysisForm: React.FC<AnalysisFormProps> = ({ onSubmit, initialData }) =>
     };
 
     const handleFileChange = (files: FileList, an: Analysis) => {
-        an.files.push(...Array.from(files));
+        an.files.push(
+            ...Array.from(files).map(file => ({
+                idFile: Math.random(),
+                name: file.name,
+                size: file.size,
+                type: file.type,
+                path: URL.createObjectURL(file)
+            }))
+        );
         setAnalysis([...analysis]);
     };
 

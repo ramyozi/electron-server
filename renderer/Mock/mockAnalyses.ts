@@ -1,6 +1,6 @@
 import {Analysis} from "../interfaces";
 
-export const MockAnalyses = [
+export const MockAnalyses: Analysis[] = [
     {
         idAnalysis: 1,
         analysisType: "Blood test",
